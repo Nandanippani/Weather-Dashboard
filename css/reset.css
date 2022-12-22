@@ -1,0 +1,94 @@
+/* Variables */
+:root {
+    --primary: #002244;
+}
+
+/* Resets */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+/* Custom styles */
+/* Header Styles */
+.bg-dark {
+    background-color: linear-gradient(90deg, #2b2b74 0%, #0f0f35 75%, #0f0f35 100%) !important;
+}
+
+/* Form Styles */
+.input-group {
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.form-input {
+    width: 150%;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+}
+
+.input-group-append {
+    display: block;
+    text-align: center;
+
+}
+
+.search-button {
+    width: 100%;
+    height: fit-content;
+
+    border-radius: 10px;
+
+}
+
+#search-button {
+    border-radius: 5px;
+    background-color: rgb(30, 144, 255);
+}
+
+/* History Styles */
+
+#search-history {
+    width: auto;
+    height: auto;
+
+    background-color: lightgray;
+}
+
+/* Today & forcast section styles */
+.weather-today {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+#forecast-heading {
+    margin-top: 15px;
+}
+
+.forecast {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    width: 100%;
+
+}
+
+.five-day-forecast {
+    border: 1px solid black;
+    padding: 5px;
+    background-color: var(--primary);
+    color: white;
+
+}
