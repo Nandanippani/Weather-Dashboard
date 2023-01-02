@@ -47,50 +47,13 @@
 
       <div class="col-lg-9 pb-3">
         <section id="today" class="mt-3" role="region" aria-live="polite">
-          <div class="weather-today">
-            <h4>London (21/12/2022)</h4>
-            <p>Temp: 15C</p>
-            <p>Wind: 1.7KPH</p>
-            <p>Humidity: 84%</p>
-          </div>
+          
         </section>
         <div id="forecast-heading">
           <h5>5-Day Forecast:</h5>
         </div>
-        <section id="forecast" class="row mt-3" role="region" aria-live="polite">
-          <div class="forecast">
-            <div class="five-day-forecast">
-              <p>Date</p>
-              <p></p>
-              <p>Temp: 12C</p>
-              <p>Wind:1.7KPH</p>
-              <p>Humidity: 84%</p>
-            </div>
-            <div class="five-day-forecast">
-              <p>Date</p>
-              <p>Temp: 12C</p>
-              <p>Wind:1.7KPH</p>
-              <p>Humidity: 84%</p>
-            </div>
-            <div class="five-day-forecast">
-              <p>Date</p>
-              <p>Temp: 12C</p>
-              <p>Wind:1.7KPH</p>
-              <p>Humidity: 84%</p>
-            </div>
-            <div class="five-day-forecast">
-              <p>Date</p>
-              <p>Temp: 12C</p>
-              <p>Wind:1.7KPH</p>
-              <p>Humidity: 84%</p>
-            </div>
-            <div class="five-day-forecast">
-              <p>Date</p>
-              <p>Temp: 12C</p>
-              <p>Wind:1.7KPH</p>
-              <p>Humidity: 84%</p>
-            </div>
-          </div>
+        <section id="forecast" class="row mt-3 fivedayforecast " role="region" aria-live="polite">
+
         </section>
       </div>
     </div>
@@ -99,8 +62,9 @@
   <!-- Moment.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
   <!-- jQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="js/weather.js"></script>
 </body>
 
 </html>
