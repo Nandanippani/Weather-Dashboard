@@ -3,6 +3,7 @@ var searchInputEl = $('#search-input');
 var weatherTodayEl = $('#today');
 var weatherForecastEl = $('#forecast');
 var forecastHeadingEl = $('#forecast-heading');
+var historyEl = $('#history');
 var apiKey = 'daa042d001552289a98a636ea00daaed';
 var iconUrl = 'https://openweathermap.org/img/w/';
 
@@ -11,7 +12,7 @@ function displayCurrentWeather(currentObj) {
     weatherTodayEl.html('');
     weatherTodayEl.append(`
         <div class="weather-today">
-        <p>${currentObj.name} ${moment(new Date(currentObj.dt * 1000).toUTCString()).format("DD/MM/YYYY")} <img src='${iconUrl + currentObj.weather[0].icon}.png'></p>
+        <h3><b>${currentObj.name} (${moment(new Date(currentObj.dt * 1000).toUTCString()).format("DD/MM/YYYY")}) <img src='${iconUrl + currentObj.weather[0].icon}.png'></b></h3>
         <p>Temp: ${currentObj.main.temp}C</p>
         <p>Wind: ${currentObj.wind.speed}KPH</p>
         <p>Humidity: ${currentObj.main.humidity}%</p>
@@ -21,7 +22,8 @@ function displayCurrentWeather(currentObj) {
 
 function displayForecastWeather(forcastObj) {
     weatherForecastEl.html('');
-    for (var obj of forcastObj) {
+    for (var i = 0; i < forcastObj.length; i = i + 8) {
+        var obj = forcastObj[i];
         weatherForecastEl.append(`
 
         <div class="eachdayforecast">
@@ -38,9 +40,13 @@ function displayForecastWeather(forcastObj) {
     }
 }
 
-function getWeather(event) {
+function onSearchClick(event) {
     event.preventDefault();
     var searchCity = searchInputEl.val();
+    getWeather(searchCity);
+}
+
+function getWeather(searchCity) {
     $.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${apiKey}&units=metric`)
         .then(function (currentData) {
             console.log(currentData);
@@ -48,21 +54,50 @@ function getWeather(event) {
             $.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&appid=${apiKey}&units=metric`)
                 .then(function (weatherData) {
                     console.log(weatherData);
-                    displayForecastWeather(weatherData.list.slice(0, 5));
+                    displayForecastWeather(weatherData.list);
+                    updateHistory(searchCity);
                 })
 
         });
+}
+
+function updateHistory(searchCity) {
+    cityName = [];
+    if (!localStorage.getItem('ct'))
+        localStorage.setItem('ct', JSON.stringify(cityName));
+    var cName = localStorage.getItem('ct');
+    cityName = JSON.parse(cName);
+    if (!cityName.find(x => x === searchCity)) {
+        cityName.push(searchCity);
+    }
+    localStorage.setItem('ct', JSON.stringify(cityName));
+
+    displayhistory();
+}
+
+function displayhistory() {
+    var cName = localStorage.getItem('ct');
+    cityName = JSON.parse(cName);
+    historyEl.html('');
+    for (var obj of cityName) {
+
+        historyEl.append(`
+
+<button class='search-history' onClick=getWeather('${obj}') >${obj}</button>
 
 
-
+`)
+    }
 
 }
 
 
 
+
 function init() {
 
-    searchButtonEl.click(getWeather);
+    searchButtonEl.click(onSearchClick);
+
 }
 
 init();

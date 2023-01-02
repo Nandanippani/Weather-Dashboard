@@ -49,8 +49,6 @@ body {
 .search-button {
     width: 100%;
     height: fit-content;
-
-
 }
 
 #search-button {
@@ -61,11 +59,13 @@ body {
 
 /* History Styles */
 
-#search-history {
-    width: auto;
-    height: auto;
+.search-history {
+
     font-size: .90rem;
+    border-radius: 5px;
     background-color: lightgray;
+    margin-bottom: 10px;
+
 }
 
 /* Today & forcast section styles */
