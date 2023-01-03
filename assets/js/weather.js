@@ -7,8 +7,10 @@ var historyEl = $('#history');
 var apiKey = 'daa042d001552289a98a636ea00daaed';
 var iconUrl = 'https://openweathermap.org/img/w/';
 
-function displayCurrentWeather(currentObj) {
 
+
+function displayCurrentWeather(currentObj) {
+    // display current weather of inputed city
     weatherTodayEl.html('');
     weatherTodayEl.append(`
         <div class="weather-today">
@@ -21,18 +23,17 @@ function displayCurrentWeather(currentObj) {
 }
 
 function displayForecastWeather(forcastObj) {
+    // display forecast weather of inputed city
     weatherForecastEl.html('');
     for (var i = 0; i < forcastObj.length; i = i + 8) {
         var obj = forcastObj[i];
         weatherForecastEl.append(`
-
         <div class="eachdayforecast">
         <p>${moment(new Date(obj.dt * 1000).toUTCString()).format("DD/MM/YYYY")}</p>
         <img src='${iconUrl + obj.weather[0].icon}.png'>
               <p>Temp: ${obj.main.temp} <span>&#176;</span>C</p>
               <p>Wind: ${obj.wind.speed} KPH</p>
-              <p>Humidity: ${obj.main.humidity}%</p>
-              
+              <p>Humidity: ${obj.main.humidity}%</p>  
         </div>     
 
 `);
@@ -41,18 +42,21 @@ function displayForecastWeather(forcastObj) {
 }
 
 function onSearchClick(event) {
+    // get inputed city value
     event.preventDefault();
     var searchCity = searchInputEl.val();
     getWeather(searchCity);
 }
 
 function getWeather(searchCity) {
+    searchInputEl.val(searchCity);
+    // fetch current and 5 day forecast weather data of inputed city from server 
     $.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${apiKey}&units=metric`)
-        .then(function (currentData) {
+        .then(function (currentData) {                // getting current weather from server
             console.log(currentData);
             displayCurrentWeather(currentData);
             $.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&appid=${apiKey}&units=metric`)
-                .then(function (weatherData) {
+                .then(function (weatherData) {        // getting 5 day forecast weather from server
                     console.log(weatherData);
                     displayForecastWeather(weatherData.list);
                     updateHistory(searchCity);
@@ -62,6 +66,7 @@ function getWeather(searchCity) {
 }
 
 function updateHistory(searchCity) {
+    // store city in local storage
     cityName = [];
     if (!localStorage.getItem('ct'))
         localStorage.setItem('ct', JSON.stringify(cityName));
@@ -76,6 +81,7 @@ function updateHistory(searchCity) {
 }
 
 function displayhistory() {
+    // parse city from cityName array and display weather of that city when history button of that city clicked
     var cName = localStorage.getItem('ct');
     cityName = JSON.parse(cName);
     historyEl.html('');
@@ -84,7 +90,6 @@ function displayhistory() {
         historyEl.append(`
 
 <button class='btn search-history' onClick=getWeather('${obj}') >${obj}</button>
-
 
 `)
     }
@@ -95,6 +100,7 @@ function displayhistory() {
 
 
 function init() {
+    // when search button clicked
 
     searchButtonEl.click(onSearchClick);
 
@@ -106,41 +112,6 @@ init();
 
 
 
-
-//https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-
-//https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-
-
-
-
-
-
-
-
-
-
-
-/* <div class="weather-today">
-            <h4>London (21/12/2022)</h4>
-            <p>Temp: 15C</p>
-            <p>Wind: 1.7KPH</p>
-            <p>Humidity: 84%</p>
-    </div>
-          
-   
-        
-        
-    <div class="five-day-forecast">
-            <div class="eachday-forecast">
-                  <p>20/12/2022</p>
-                  <p>Cloud Icon</p>
-                  <p>Temp: 12C</p>
-                  <p>Wind:1.7KPH</p>
-                  <p>Humidity: 84%</p>
-            </div>     
-    </div> 
-*/
 
 
 
