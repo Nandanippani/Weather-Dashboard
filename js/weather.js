@@ -13,8 +13,8 @@ function displayCurrentWeather(currentObj) {
     weatherTodayEl.append(`
         <div class="weather-today">
         <h3><b>${currentObj.name} (${moment(new Date(currentObj.dt * 1000).toUTCString()).format("DD/MM/YYYY")}) <img src='${iconUrl + currentObj.weather[0].icon}.png'></b></h3>
-        <p>Temp: ${currentObj.main.temp}C</p>
-        <p>Wind: ${currentObj.wind.speed}KPH</p>
+        <p>Temp: ${currentObj.main.temp} <span>&#176;</span>C</p>
+        <p>Wind: ${currentObj.wind.speed} KPH</p>
         <p>Humidity: ${currentObj.main.humidity}%</p>
 </div>`)
 
@@ -29,9 +29,9 @@ function displayForecastWeather(forcastObj) {
         <div class="eachdayforecast">
         <p>${moment(new Date(obj.dt * 1000).toUTCString()).format("DD/MM/YYYY")}</p>
         <img src='${iconUrl + obj.weather[0].icon}.png'>
-              <p>Temp: ${obj.main.temp}</p>
-              <p>Wind: ${obj.wind.speed}</p>
-              <p>Humidity: ${obj.main.humidity}</p>
+              <p>Temp: ${obj.main.temp} <span>&#176;</span>C</p>
+              <p>Wind: ${obj.wind.speed} KPH</p>
+              <p>Humidity: ${obj.main.humidity}%</p>
               
         </div>     
 
@@ -83,7 +83,7 @@ function displayhistory() {
 
         historyEl.append(`
 
-<button class='search-history' onClick=getWeather('${obj}') >${obj}</button>
+<button class='btn search-history' onClick=getWeather('${obj}') >${obj}</button>
 
 
 `)

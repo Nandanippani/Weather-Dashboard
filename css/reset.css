@@ -60,7 +60,8 @@ body {
 /* History Styles */
 
 .search-history {
-
+    width: 100%;
+    height: fit-content;
     font-size: .90rem;
     border-radius: 5px;
     background-color: lightgray;
