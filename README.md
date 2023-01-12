@@ -18,9 +18,12 @@ Curent weather is shown like this
 
 ### The URL of the deployed application
 
+https://nandanippani.github.io/Weather-Dashboard/
+
 
 ### The URL of the GitHub repository that contains my code
 
+https://github.com/Nandanippani/Weather-Dashboard
 
 
 ## Installation
